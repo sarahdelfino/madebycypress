@@ -1,14 +1,119 @@
 button {
-    border-radius: 25px;
+    border-radius: 8px;
     border: none;
-    background-color: green;
+    background-color: #14BF65;
     color: white;
-    width: 100px;
+    padding: 16px 24px;
     font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: auto;
+    position: relative;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+}
+
+.heading {
+    height: 460px;
+}
+
+.tagline-container {
+    width: 1084px;
+    height: 340px;
+    border: 20px solid #14BF65;
+    border-right: 0px;
+    position: absolute;
+    z-index: 1;
+    padding: 48px;
+}
+
+h1.tagline {
+    font-size: 2.5rem;
+    max-width: 600px;
+}
+
+img.logo {
+    width: 250px;
+}
+
+img.cypress {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.busy-container {
+    display: flex;
+    border-right: 20px solid #14BF65;
+}
+
+.container-text {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    margin: auto;
+}
+
+.stripes {
+        border-right: 20px solid #14BF65;
+    height: 550px;
+    background: repeating-linear-gradient(
+        to left,
+        #fff,
+        #fff 40px,
+        #14BF65 40px,
+        #14BF65 80px
+    );
+    position: relative;
+    z-index: 0;
+}
+
+.section {
+    position: absolute;
+    background-color: #1D549D;
+    width: 85%;
+    margin: auto;
+    padding: 48px 24px;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, - 50%);
+}
+
+h2.title {
+    font-size: 2.5rem;
+}
+
+.columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.col {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.col > h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0px;
+}
+
+.process-container {
+    border-right: 20px solid #14BF65;
+}
+
+.process-container > h2.title {
+    margin-top: 0;
 }
