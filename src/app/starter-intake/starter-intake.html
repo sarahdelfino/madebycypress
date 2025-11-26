@@ -1,0 +1,92 @@
+<div class="intake-container">
+  <h1>Let's Get Started</h1>
+  <p class="subtitle">
+    Tell us a bit about your business so we can build the right solution for you.
+  </p>
+
+  <form [formGroup]="intakeForm" (ngSubmit)="onSubmit()" class="intake-form">
+    <!-- Contact -->
+    <div class="form-row two-col">
+      <div class="field">
+        <label>Your Name</label>
+        <input formControlName="name" type="text" required />
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input formControlName="email" type="email" required />
+      </div>
+    </div>
+
+    <div class="form-row two-col">
+      <div class="field">
+        <label>Company (optional)</label>
+        <input formControlName="company" type="text" />
+      </div>
+      <div class="field">
+        <label>Phone (optional)</label>
+        <input formControlName="phone" type="tel" />
+      </div>
+    </div>
+
+    <!-- Questions -->
+    <div class="field">
+      <label>1. Tell us about your business and what you do.</label>
+      <textarea formControlName="business"></textarea>
+    </div>
+
+    <div class="field">
+      <label>2. What are you hoping your new website or software will help you achieve?</label>
+      <textarea
+        formControlName="goal"
+        placeholder="e.g., more leads, less manual work, better online presence"
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <label>3. What’s not working well with your current setup or process?</label>
+      <textarea formControlName="notWorking"></textarea>
+    </div>
+
+    <div class="field">
+      <label>4. Which tools or platforms do you currently use (if any)?</label>
+      <textarea
+        formControlName="tools"
+        placeholder="e.g., Google Workspace, QuickBooks, Squarespace, Mailchimp"
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <label>5. Do you already have branding or content ready? (logos, photos, text, colors)</label>
+      <textarea formControlName="branding"></textarea>
+    </div>
+
+    <div class="form-row two-col">
+      <div class="field">
+        <label>6. When would you ideally like to launch?</label>
+        <input formControlName="timeline" type="text" placeholder="e.g., within 2–3 months" />
+      </div>
+      <div class="field">
+        <label>7. Budget Range</label>
+        <select formControlName="budget">
+          <option value="">Select one</option>
+          <option value="under-2000">Under $2,000</option>
+          <option value="2000-5000">$2,000–$5,000</option>
+          <option value="5000-10000">$5,000–$10,000</option>
+          <option value="over-10000">Over $10,000</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>8. How do you prefer to communicate?</label>
+      <select formControlName="contactpref">
+        <option value="">Select one</option>
+        <option value="email">Email</option>
+        <option value="text">Text message</option>
+        <option value="call">Scheduled call</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="intakeForm.invalid">Submit</button>
+  </form>
+</div>
