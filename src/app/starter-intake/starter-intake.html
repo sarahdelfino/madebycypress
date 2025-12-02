@@ -1,72 +1,154 @@
-<div class="intake-container">
-  <h1>Let's Get Started</h1>
-  <p class="subtitle">
-    Tell us a bit about your business so we can build the right solution for you.
-  </p>
+<!-- full-intake.component.html -->
+<section class="intake-page">
+  <header class="intake-header">
+    <h1>Project Intake</h1>
+    <p>
+      Share a bit more detail so I can give you an accurate recommendation and next steps.
+      This usually takes about 5–10 minutes.
+    </p>
+  </header>
 
-  <form [formGroup]="intakeForm" (ngSubmit)="onSubmit()" class="intake-form">
-    <!-- Contact -->
-    <div class="form-row two-col">
-      <div class="field">
-        <label>Your Name</label>
-        <input formControlName="name" type="text" required />
-      </div>
-      <div class="field">
-        <label>Email</label>
-        <input formControlName="email" type="email" required />
+  <!-- Step indicator -->
+  <div class="stepper">
+    <div class="stepper-track">
+      <div
+        class="stepper-track-fill"
+        [style.width.%]="(currentStep / totalSteps) * 100"
+      ></div>
+    </div>
+    <div class="stepper-labels">
+      <div
+        class="stepper-label"
+        *ngFor="let step of steps; let i = index"
+        [class.active]="currentStep === i + 1"
+        [class.completed]="currentStep > i + 1"
+      >
+        <span class="step-index">{{ i + 1 }}</span>
+        <span class="step-title">{{ step }}</span>
       </div>
     </div>
+  </div>
 
-    <div class="form-row two-col">
+  <form
+    class="intake-form"
+    [formGroup]="intakeForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
+    <!-- STEP 1 -->
+    <ng-container *ngIf="currentStep === 1">
+      <h2>Contact details</h2>
+
       <div class="field">
-        <label>Company (optional)</label>
+        <label>Your name <span class="required">*</span></label>
+        <input formControlName="name" type="text" />
+        <div class="error" *ngIf="isInvalid('name')">
+          Please enter your name.
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email <span class="required">*</span></label>
+        <input formControlName="email" type="email" />
+        <div class="error" *ngIf="isInvalid('email')">
+          Please enter a valid email.
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Company <span class="optional-hint">(optional)</span></label>
         <input formControlName="company" type="text" />
       </div>
+
       <div class="field">
-        <label>Phone (optional)</label>
+        <label>Phone <span class="optional-hint">(optional)</span></label>
         <input formControlName="phone" type="tel" />
       </div>
-    </div>
+    </ng-container>
 
-    <!-- Questions -->
-    <div class="field">
-      <label>1. Tell us about your business and what you do.</label>
-      <textarea formControlName="business"></textarea>
-    </div>
+    <!-- STEP 2 -->
+    <ng-container *ngIf="currentStep === 2">
+      <h2>About your business & goals</h2>
 
-    <div class="field">
-      <label>2. What are you hoping your new website or software will help you achieve?</label>
-      <textarea
-        formControlName="goal"
-        placeholder="e.g., more leads, less manual work, better online presence"
-      ></textarea>
-    </div>
-
-    <div class="field">
-      <label>3. What’s not working well with your current setup or process?</label>
-      <textarea formControlName="notWorking"></textarea>
-    </div>
-
-    <div class="field">
-      <label>4. Which tools or platforms do you currently use (if any)?</label>
-      <textarea
-        formControlName="tools"
-        placeholder="e.g., Google Workspace, QuickBooks, Squarespace, Mailchimp"
-      ></textarea>
-    </div>
-
-    <div class="field">
-      <label>5. Do you already have branding or content ready? (logos, photos, text, colors)</label>
-      <textarea formControlName="branding"></textarea>
-    </div>
-
-    <div class="form-row two-col">
       <div class="field">
-        <label>6. When would you ideally like to launch?</label>
-        <input formControlName="timeline" type="text" placeholder="e.g., within 2–3 months" />
+        <label>
+          1. What does your business do?
+          <span class="required">*</span>
+          <span class="optional-hint">(2–3 sentences is plenty)</span>
+        </label>
+        <textarea formControlName="business"></textarea>
+        <div class="error" *ngIf="isInvalid('business')">
+          Please tell me a bit about your business.
+        </div>
       </div>
+
       <div class="field">
-        <label>7. Budget Range</label>
+        <label>
+          2. What should this project help you achieve?
+          <span class="required">*</span>
+          <span class="optional-hint">
+            (e.g., more leads, less manual work, better online presence)
+          </span>
+        </label>
+        <textarea formControlName="goal"></textarea>
+        <div class="error" *ngIf="isInvalid('goal')">
+          Please share what you’d like this project to accomplish.
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- STEP 3 -->
+    <ng-container *ngIf="currentStep === 3">
+      <h2>Current setup & assets</h2>
+
+      <div class="field">
+        <label>
+          3. What’s not working well with your current setup or process?
+          <span class="optional-hint">(optional)</span>
+        </label>
+        <textarea formControlName="notWorking"></textarea>
+      </div>
+
+      <div class="field">
+        <label>
+          4. Which tools or platforms do you currently use (if any)?
+          <span class="optional-hint">
+            (e.g., Google Workspace, QuickBooks, Squarespace, Mailchimp)
+          </span>
+        </label>
+        <textarea formControlName="tools"></textarea>
+      </div>
+
+      <div class="field">
+        <label>
+          5. Do you already have branding or content ready?
+          <span class="optional-hint">(logos, photos, text, colors)</span>
+        </label>
+        <textarea formControlName="branding"></textarea>
+      </div>
+    </ng-container>
+
+    <!-- STEP 4 -->
+    <ng-container *ngIf="currentStep === 4">
+      <h2>Timeline, budget & communication</h2>
+
+      <div class="field">
+        <label>
+          6. When would you ideally like to launch?
+          <span class="optional-hint">(optional)</span>
+        </label>
+        <input
+          formControlName="timeline"
+          type="text"
+          placeholder="e.g., within 2–3 months"
+        />
+      </div>
+
+      <div class="field">
+        <label>
+          7. Budget range
+          <span class="required">*</span>
+        </label>
         <select formControlName="budget">
           <option value="">Select one</option>
           <option value="under-2000">Under $2,000</option>
@@ -74,19 +156,55 @@
           <option value="5000-10000">$5,000–$10,000</option>
           <option value="over-10000">Over $10,000</option>
         </select>
+        <div class="error" *ngIf="isInvalid('budget')">
+          Please pick a budget range (it can be approximate).
+        </div>
       </div>
-    </div>
 
-    <div class="field">
-      <label>8. How do you prefer to communicate?</label>
-      <select formControlName="contactpref">
-        <option value="">Select one</option>
-        <option value="email">Email</option>
-        <option value="text">Text message</option>
-        <option value="call">Scheduled call</option>
-      </select>
-    </div>
+      <div class="field">
+        <label>
+          8. How do you prefer to communicate?
+          <span class="required">*</span>
+        </label>
+        <select formControlName="contactpref">
+          <option value="">Select one</option>
+          <option value="email">Email</option>
+          <option value="text">Text message</option>
+          <option value="call">Scheduled call</option>
+        </select>
+        <div class="error" *ngIf="isInvalid('contactpref')">
+          Please choose how you’d prefer to communicate.
+        </div>
+      </div>
+    </ng-container>
 
-    <button type="submit" [disabled]="intakeForm.invalid">Submit</button>
+    <!-- Actions -->
+    <div class="form-actions">
+      <button
+        type="button"
+        class="secondary"
+        (click)="prevStep()"
+        [disabled]="currentStep === 1 || isSubmitting"
+      >
+        Back
+      </button>
+
+      <button
+        *ngIf="currentStep < totalSteps"
+        type="button"
+        (click)="nextStep()"
+        [disabled]="isSubmitting"
+      >
+        Next
+      </button>
+
+      <button
+        *ngIf="currentStep === totalSteps"
+        type="submit"
+        [disabled]="intakeForm.invalid || isSubmitting"
+      >
+        {{ isSubmitting ? 'Submitting…' : 'Submit intake' }}
+      </button>
+    </div>
   </form>
-</div>
+</section>

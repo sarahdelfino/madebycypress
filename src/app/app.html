@@ -8,16 +8,17 @@
                     the other way around.</u></h1>
             <button>Work with us</button>
         </div>
-        <img class="cypress" src="cypress.png">
+        <img class="cypress" src="cypress.svg">
     </div>
     <div class="busy-container">
-        <img src="busy.svg">
+        <img class="busy" src="busy.svg">
         <div class="container-text">
-        <h2 class="title">Your manual processes are siphoning your time.</h2>
-        <p>I create purposeful, custom-built solutions designed to save time, operate efficiently, and grow with confidence.</p>
+            <h2 class="title">Your manual processes are siphoning your time.</h2>
+            <p style="padding: 2rem;">I create purposeful, custom-built solutions designed to save time, operate
+                efficiently, and grow with
+                confidence.</p>
         </div>
     </div>
-    <div class="stripes">
         <div class="section">
             <h2 class="title">What I build</h2>
             <div class="columns">
@@ -41,9 +42,96 @@
                 </div>
             </div>
         </div>
-    </div>
     <div class="process-container">
-        <h2 style="padding: 40px;" class="title">My process</h2>
-        <img src="process.svg">
+        <h2 class="title">My process</h2>
+        <img class="process-img" src="process.svg">
+        <div class="process-steps">
+            <div class="step">
+                <div class="circle">1</div>
+                <h3>Discovery</h3>
+                <p>I start by getting a clear picture of your business, your audience, and the challenges you’re trying
+                    to solve.</p>
+            </div>
+            <div class="step">
+                <div class="circle">2</div>
+                <h3>Plan & Design</h3>
+                <p>I create a structured, thoughtful plan and design that aligns with your brand and your business
+                    needs.</p>
+            </div>
+            <div class="step">
+                <div class="circle">3</div>
+                <h3>Build & Launch</h3>
+                <p>I develop your solution with clean architecture and solid engineering that will hold up over time.
+                </p>
+            </div>
+            <div class="step">
+                <div class="circle">4</div>
+                <h3>Support & Improve</h3>
+                <p>We launch confidently, and I’m here afterward to refine, maintain, or expand as your needs grow.</p>
+            </div>
+        </div>
     </div>
+    @if (mode !== 'full') {
+    <div class="form-container">
+        <h2 class="title">Ready to explore a project?</h2>
+        <p style="margin: 2rem;">
+            Share a few details and I’ll follow up with next steps.
+            No pressure, no spam.
+        </p>
+
+        <form class="contact-form" [formGroup]="shortContactForm" (ngSubmit)="onShortFormSubmit()">
+            <div class="field">
+                <label>Your name</label>
+                <input formControlName="name" type="text" required />
+            </div>
+
+            <div class="field">
+                <label>Email</label>
+                <input formControlName="email" type="email" required />
+            </div>
+
+            <div class="field">
+                <label>What do you need help with?</label>
+                <select formControlName="projectType" required>
+                    <option value="">Select one</option>
+                    <option value="new-site">New website</option>
+                    <option value="redesign">Website redesign</option>
+                    <option value="branding">Branding & visual identity</option>
+                    <option value="internal-tool">Internal tool / automation</option>
+                    <option value="not-sure">I’m not sure yet</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>
+                    Anything else you’d like to share?
+                    <span class="optional-hint">(optional, 1–2 sentences is plenty)</span>
+                </label>
+                <textarea formControlName="message"></textarea>
+            </div>
+
+            <button type="submit" [disabled]="shortContactForm.invalid">
+                Get in touch
+            </button>
+        </form>
+    </div>
+    }
+    <!-- Thank-you screen after short form -->
+    @if (mode === 'thankyou') {
+    <div class="form-container">
+        <h2>Thanks — I’ll follow up soon!</h2>
+        <p>
+            I’ve received your details. If you’d like to share more now so I can give
+            a more tailored recommendation, you can fill out the full project intake.
+        </p>
+        <button (click)="mode = 'full'">
+            Fill out the full intake (optional)
+        </button>
+    </div>
+    }
+
+    <!-- Full intake form (your existing app-starter-intake) -->
+    @if (mode === 'full') {
+    <app-starter-intake></app-starter-intake>
+    }
 </div>
