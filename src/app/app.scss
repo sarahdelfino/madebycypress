@@ -25,22 +25,15 @@ button {
   padding: 10px;
 }
 
-.heading {
-  height: 475px;
-}
-
 .tagline-container {
   max-width: 1084px;
-  height: 340px;
-  position: absolute;
-  z-index: 1;
-  padding: 2rem;
+  padding: 1rem;
   border: none;
 }
 
 h1.tagline {
-  font-size: 2.5rem;
   max-width: 600px;
+  margin-top: 0px;
 }
 
 img.logo {
@@ -58,6 +51,8 @@ img.cypress {
 }
 
 .container-text {
+  background-color: #F0E6D0;
+  color: #1d549d;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -95,7 +90,6 @@ h3 {
 .process-container {
   border: none; // no borders on mobile
   position: relative;
-  height: 650px;
 }
 
 img.process-img {
@@ -113,8 +107,9 @@ img.process-img {
 /* STEP WRAPPER */
 div.step {
   position: relative;
-  padding-left: 130px;   // room for left-side circles
-  margin-bottom: 48px;   // spacing between steps
+  padding-left: 130px;
+  padding-right: 8px;
+  margin-bottom: 48px;
 }
 
 div.step > p {
